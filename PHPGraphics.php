@@ -37,9 +37,9 @@ class PHPGraphics {
         }
     }
     function barChart($data,$x,$y,$sx,$sy,$flagexam=true,$flagfill=false,$fillcolor=0){
-        /*$dataÎª¶þÎ¬Êý×é£¬¸ñÊ½ÈçÏÂ£º
-         * 1.Ã¿¸ö¼ü¶ÔÓ¦Ò»¸öÏîÄ¿£¬±ØÐëÊÇÊý×é
-         * 2.Ã¿¸ö¼üÏÂµÄÃ¿¸ö¼üÊÇÒ»¸öÊý¾Ý
+        /*$dataä¸ºäºŒç»´æ•°ç»„ï¼Œæ ¼å¼å¦‚ä¸‹ï¼š
+         * 1.æ¯ä¸ªé”®å¯¹åº”ä¸€ä¸ªé¡¹ç›®ï¼Œå¿…é¡»æ˜¯æ•°ç»„
+         * 2.æ¯ä¸ªé”®ä¸‹çš„æ¯ä¸ªé”®æ˜¯ä¸€ä¸ªæ•°æ®
          */
         $max=$this->maxOfData($data); 
         $count=count($data,1);
@@ -187,7 +187,7 @@ class PHPGraphics {
         foreach($data as $key=>$val){
             if($examx+18+9*strlen($key)>$sy){
                 $examy+=18;
-                $examx=$sx;
+                $examx=$x;
             }
             imagefilledrectangle($this->gdres,$examx,$examy+20,$examx+15,$examy+15+20,$this->colors[$curritem]);
             $examx+=18;
