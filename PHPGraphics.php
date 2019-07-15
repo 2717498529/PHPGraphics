@@ -1,5 +1,11 @@
 <?php
 class PHPGraphics {
+    /* Function:A class that can be used to make charts
+     * Date:2019-07-15
+     * Author:CaoAng
+     * Version:pre-190715
+     * Describe:The version is not stable,and it doesn't support using Chinese!
+     */
     public $gdres;
     public $data;
     public $colors=array(
@@ -107,9 +113,9 @@ class PHPGraphics {
             $curritem++;
         }
     }
-    function pieChart($data,$x,$y,$sx,$sy,$flag3d=true,$flagexam=true,$flagfill=false,$fillcolor=0,$center=null){
+    function pieChart($data,$x,$y,$sx,$sy,$flag3d=true,$flagexam=true,$flagpercent=true,$flagfill=false,$fillcolor=0,$center=null){
         $total=array_sum($data);
-        echo $total.'#';
+        //echo $total.'#';
         $chartsy=$sy;
         $chartsx=round(0.8*$sx);
         if($flagfill){
@@ -120,21 +126,20 @@ class PHPGraphics {
             $examx=$x;
             $curritem=0;
             foreach($data as $key=>$val){
-                if($examx+18+9*strlen($key)>$sy){
+                if($examx+18+9*strlen($key)+45>$sy){
                     $examy+=18;
-                    $examx=$sx;
+                    $examx=$x;
                 }
                 imagefilledrectangle($this->gdres,$examx,$examy,$examx+15,$examy+15,$this->colors[$curritem]);
                 $examx+=18;
-                imagestring($this->gdres,3,$examx,$examy, $key,0);
+                imagestring($this->gdres,3,$examx,$examy,$key,0);
                 $examx+=9*strlen($key);
+                if($flagpercent){
+                    imagestring($this->gdres,3,$examx,$examy,round($val/$total*100,1).'%',0);
+                    $examx+=45;
+                }
                 $curritem++;
             }
-            imagefilledrectangle($this->gdres,$examx,$examy,$examx+15,$examy+15,$this->colors[$curritem]);
-            $examx+=18;
-            imagestring($this->gdres,3,$examx,$examy, $key,0);
-            $examx+=9*strlen($key);
-            $curritem++;
             $chartsy=round($sy*0.5);
         }
         if($center==null){
@@ -151,22 +156,28 @@ class PHPGraphics {
         for($i=0;$i<$floors-1;$i++){
             $angle_passed=0;
             $curritem=0;
-            foreach($data as $key=>$val){
+            foreach($data as $val){
                 $angle=$val/$total*360;
-                echo $angle.'|';
-                imagefilledarc($this->gdres,$center[0],$center[1]-$i,$chartsx,$chartsy/*(chart size of x)*/,$angle_passed,$angle,$this->colors[$curritem]&0xe0e0e0,IMG_ARC_PIE);
+                imagefilledarc($this->gdres,$center[0],$center[1]-$i,$chartsx,$chartsy,$angle_passed,$angle_passed+$angle,$this->colors[$curritem]&0xe0e0e0,IMG_ARC_PIE);
                 $curritem++;
-                echo $angle_passed.'/';
+                //echo $angle_passed.'/';
                 $angle_passed+=$angle;
             }
         }
         $angle_passed=0;
         $curritem=0;
-        foreach($data as $key=>$val){
+        //print_r($data);
+        //$test_x=150;
+        //$center[0]=$test_x;
+        foreach($data as $val){
+            //echo $val;
+            //print_r($data);
             $angle=$val/$total*360;
-            imagefilledarc($this->gdres,$center[0],$center[1]-$i-1,$chartsx,$chartsy/*(chart size of x)*/,$angle_passed,$angle,$this->colors[$curritem],IMG_ARC_PIE);
+            //echo $angle_passed.'/'.$angle.'|';
+            imagefilledarc($this->gdres,$center[0],$center[1]-$floors,$chartsx,$chartsy,$angle_passed,$angle_passed+$angle,$this->colors[$curritem],IMG_ARC_PIE);
             $curritem++;
             $angle_passed+=$angle;
+            //$center[0]+=250;
         }
     }
     function example($data,$x,$y,$sx,$sy){
@@ -178,9 +189,9 @@ class PHPGraphics {
                 $examy+=18;
                 $examx=$sx;
             }
-            imagefilledrectangle($this->gdres,$examx,$examy,$examx+15,$examy+15,$this->colors[$curritem]);
+            imagefilledrectangle($this->gdres,$examx,$examy+20,$examx+15,$examy+15+20,$this->colors[$curritem]);
             $examx+=18;
-            imagestring($this->gdres,3,$examx,$examy, $key,0);
+            imagestring($this->gdres,3,$examx,$examy+20, $key,0);
             $examx+=9*strlen($key);
             $curritem++;
         }
@@ -211,9 +222,9 @@ class PHPGraphics {
         return $max;
     }
 }
-$g=new PHPGraphics;
-$g->createImage(550,440,0);
-//$g->lineChart(array('Xu Yanan'=>array('mon'=>827,'tue'=>2005,'wed'=>2660,'thu'=>520,'fri'=>1666),'Test A'=>array('mon'=>1666,'tue'=>2345,'wed'=>2827,'thu'=>1314,'fri'=>99),'Test B'=>array('mon'=>1827,'tue'=>1679,'wed'=>999,'thu'=>2520,'fri'=>1440),'20050827'=>array('mon'=>527,'tue'=>2587,'wed'=>2018,'thu'=>1840,'fri'=>1234)),25, 20, 500, 400);
-$g->pieChart(array('mon'=>827,'tue'=>2019,'wed'=>2660,'thu'=>520,'fri'=>1666),0,0,400,300);
-imagepng($g->gdres);
+/*$g=new PHPGraphics;
+$g->createImage(400,300,0);
+$g->barChart(array('Xu Yanan'=>array('mon'=>827,'tue'=>2005,'wed'=>2660,'thu'=>520,'fri'=>1666),'Test A'=>array('mon'=>1666,'tue'=>2345,'wed'=>2827,'thu'=>1314,'fri'=>99),'Test B'=>array('mon'=>1827,'tue'=>1679,'wed'=>999,'thu'=>2520,'fri'=>1440),'20050827'=>array('mon'=>527,'tue'=>2587,'wed'=>2018,'thu'=>1840,'fri'=>1234)),25, 20, 400,300);
+//$g->pieChart(array('mon'=>827,'tue'=>2019,'wed'=>2660,'thu'=>520,'fri'=>1666),0,0,400,300);
+imagepng($g->gdres,'bar.png');*/
 ?>
