@@ -27,7 +27,7 @@ class PHPGraphics {
         switch ($from){
             case 0:
                 $this->gdres=imagecreatetruecolor($x,$y);
-                imagefill($this->gdres,0,0,0xc0c0c0);
+                //imagefill($this->gdres,0,0,0xc0c0c0);
             case 1:
                 //$this->gdres=imagecreatefromgif($filename);
             case 2:
@@ -37,9 +37,9 @@ class PHPGraphics {
         }
     }
     function barChart($data,$x,$y,$sx,$sy,$flagexam=true,$flagfill=false,$fillcolor=0){
-        /*$dataä¸ºäºŒç»´æ•°ç»„ï¼Œæ ¼å¼å¦‚ä¸‹ï¼š
-         * 1.æ¯ä¸ªé”®å¯¹åº”ä¸€ä¸ªé¡¹ç›®ï¼Œå¿…é¡»æ˜¯æ•°ç»„
-         * 2.æ¯ä¸ªé”®ä¸‹çš„æ¯ä¸ªé”®æ˜¯ä¸€ä¸ªæ•°æ®
+        /*$dataÎª¶þÎ¬Êý×é£¬¸ñÊ½ÈçÏÂ£º
+         * 1.Ã¿¸ö¼ü¶ÔÓ¦Ò»¸öÏîÄ¿£¬±ØÐëÊÇÊý×é
+         * 2.Ã¿¸ö¼üÏÂµÄÃ¿¸ö¼üÊÇÒ»¸öÊý¾Ý
          */
         $max=$this->maxOfData($data); 
         $count=count($data,1);
@@ -222,9 +222,9 @@ class PHPGraphics {
         return $max;
     }
 }
-/*$g=new PHPGraphics;
+$g=new PHPGraphics;
 $g->createImage(400,300,0);
-$g->barChart(array('Xu Yanan'=>array('mon'=>827,'tue'=>2005,'wed'=>2660,'thu'=>520,'fri'=>1666),'Test A'=>array('mon'=>1666,'tue'=>2345,'wed'=>2827,'thu'=>1314,'fri'=>99),'Test B'=>array('mon'=>1827,'tue'=>1679,'wed'=>999,'thu'=>2520,'fri'=>1440),'20050827'=>array('mon'=>527,'tue'=>2587,'wed'=>2018,'thu'=>1840,'fri'=>1234)),25, 20, 400,300);
+$g->lineChart(array('Xu Yanan'=>array('mon'=>827,'tue'=>2005,'wed'=>2660,'thu'=>520,'fri'=>1666),'Test A'=>array('mon'=>1666,'tue'=>2345,'wed'=>2827,'thu'=>1314,'fri'=>99),'Test B'=>array('mon'=>1827,'tue'=>1679,'wed'=>999,'thu'=>2520,'fri'=>1440),'20050827'=>array('mon'=>527,'tue'=>2587,'wed'=>2018,'thu'=>1840,'fri'=>1234)),25, 20, 400,300);
 //$g->pieChart(array('mon'=>827,'tue'=>2019,'wed'=>2660,'thu'=>520,'fri'=>1666),0,0,400,300);
-imagepng($g->gdres,'bar.png');*/
+imagepng($g->gdres,'line.png');
 ?>
