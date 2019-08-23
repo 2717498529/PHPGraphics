@@ -2,8 +2,8 @@
 class PHPGraphics {
     /* Function:A class that can be used to make charts
      * Date:2019-07-15
-     * Author:CaoAng
-     * Version:pre-190715
+     * Author:LoveXYN0827
+     * Version:pre-190823
      * Describe:The version is not stable,and it doesn't support using Chinese!
      */
     public $gdres;
@@ -24,6 +24,7 @@ class PHPGraphics {
         
     }
     function createImage($x,$y,$from=0,$filename=null){
+		//Create a new GD image and return to $this->gdres
         switch ($from){
             case 0:
                 $this->gdres=imagecreatetruecolor($x,$y);
@@ -221,10 +222,16 @@ class PHPGraphics {
         }
         return $max;
     }
-}
+}/*
 $g=new PHPGraphics;
 $g->createImage(400,300,0);
-$g->lineChart(array('Xu Yanan'=>array('mon'=>827,'tue'=>2005,'wed'=>2660,'thu'=>520,'fri'=>1666),'Test A'=>array('mon'=>1666,'tue'=>2345,'wed'=>2827,'thu'=>1314,'fri'=>99),'Test B'=>array('mon'=>1827,'tue'=>1679,'wed'=>999,'thu'=>2520,'fri'=>1440),'20050827'=>array('mon'=>527,'tue'=>2587,'wed'=>2018,'thu'=>1840,'fri'=>1234)),25, 20, 400,300);
+$g->lineChart(
+              array('Xu Yanan'=>array('mon'=>827,'tue'=>2019,'wed'=>2660,'thu'=>520,'fri'=>1666),
+			        'Test A'=>array('mon'=>1314,'tue'=>2345,'wed'=>2827,'thu'=>1314,'fri'=>99),
+					'Test B'=>array('mon'=>1827,'tue'=>1679,'wed'=>999,'thu'=>2520,'fri'=>1440),
+					'20050827'=>array('mon'=>527,'tue'=>2587,'wed'=>2018,'thu'=>1840,'fri'=>1234)
+			  )
+			  ,25, 20, 400,300);
 //$g->pieChart(array('mon'=>827,'tue'=>2019,'wed'=>2660,'thu'=>520,'fri'=>1666),0,0,400,300);
-imagepng($g->gdres,'line.png');
+imagepng($g->gdres,'line.png');*/
 ?>

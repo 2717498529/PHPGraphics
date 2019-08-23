@@ -2,7 +2,8 @@
 class PHPGraphicsString{
     /* Function:A class that can write some words on a picture,using a set of dot martix font.
      * Date:2019-07-16
-     * Author:827
+	 * Version:pre-190823
+     * Author:LoveXYN0827
      */
     public $gdres;
     public $string;
@@ -99,10 +100,10 @@ class PHPGraphicsString{
         }
     }
 }
-$g=new PHPGraphicsString("hzk16",16,16,"ASC16",8,16);
+/*$g=new PHPGraphicsString("hzk16",16,16,"ASC16",8,16);
 $g->gdres=imagecreatetruecolor(4000,300);
 imagefill($g->gdres,0,0,0xffffff);
-$g->writeString("Love20050827许亚楠",0,0,160,160);
+$g->writeString("中文 English",0,0,160,160);
 //echo $g->font_sx_asc;
-imagepng($g->gdres,"xyn.png");
+imagepng($g->gdres,"xyn.png");*/
 ?>
